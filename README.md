@@ -1,6 +1,6 @@
 # Hey Gorgeous
 
-Marketing site for Hey Gorgeous, a neighborhood beauty studio (hair, nails, skin, lashes &amp; brows, makeup).
+Marketing site for Hey Gorgeous, a bridal hair &amp; makeup specialist (on-location, trials included).
 
 Static HTML/CSS/JS — no build step, no dependencies. Edit the files, refresh the browser.
 
@@ -21,12 +21,12 @@ npx --yes serve .
 
 ## Files
 
-- `index.html` — all page content, single page with anchor sections (`#services`, `#about`, `#gallery`, `#testimonials`, `#book`, `#visit`).
-- `styles.css` — one stylesheet. Design tokens live in `:root` at the top.
-- `script.js` — mobile nav toggle, scroll-state header, reveal-on-scroll, client-side form validation, footer year.
+- `index.html` — all page content, single page with anchor sections (`#approach`, `#packages`, `#trial`, `#gallery`, `#testimonials`, `#faq`, `#inquire`, `#visit`).
+- `styles.css` — one stylesheet. Design tokens live in `:root` at the top (ivory / blush / champagne / gold palette).
+- `script.js` — mobile nav toggle, scroll-state header, reveal-on-scroll, client-side inquiry form validation (name + email + future wedding date), footer year.
 
 ## Placeholder content
 
-Phone, email, address, hours, prices, and stylist counts in `index.html` are placeholders. The gallery uses CSS gradients instead of real photography. Swap these for real content before going live.
+Phone, email, address, package prices, travel radius, deposit percentage, trial cost, and testimonials in `index.html` are placeholders. The gallery and approach "bloom" composition use CSS gradients instead of real photography. Swap these for real content before going live.
 
-The booking form is client-side only — submissions are validated and surfaced to the user, but not sent anywhere. Wire it to a backend (Formspree, Netlify Forms, a serverless function, etc.) when ready.
+The inquiry form is client-side only — submissions are validated and surfaced to the user, but not sent anywhere. Wire it to a backend (Formspree, Netlify Forms, a serverless function, etc.) when ready.

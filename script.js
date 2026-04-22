@@ -38,7 +38,9 @@
     );
 
     document
-      .querySelectorAll('.section-head, .service, blockquote, .about-copy, .about-art, .book-copy, .book-form, .visit-grid > *')
+      .querySelectorAll(
+        '.section-head, .service, .trial-step, .tile, blockquote, .faq-list details, .about-copy, .approach-art, .book-copy, .book-form, .visit-grid > *'
+      )
       .forEach((el) => {
         el.classList.add('reveal');
         observer.observe(el);
@@ -55,10 +57,10 @@
       const data = new FormData(form);
       const name = String(data.get('name') || '').trim();
       const email = String(data.get('email') || '').trim();
-      const service = String(data.get('service') || '').trim();
+      const weddingDate = String(data.get('weddingDate') || '').trim();
 
-      if (!name || !email || !service) {
-        status.textContent = 'Please fill in your name, email, and the service you want.';
+      if (!name || !email || !weddingDate) {
+        status.textContent = 'Please share your name, email, and wedding date so I can check availability.';
         status.classList.add('is-error');
         return;
       }
@@ -67,8 +69,16 @@
         status.classList.add('is-error');
         return;
       }
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const picked = new Date(weddingDate);
+      if (Number.isNaN(picked.getTime()) || picked < today) {
+        status.textContent = 'Please pick a wedding date in the future.';
+        status.classList.add('is-error');
+        return;
+      }
 
-      status.textContent = 'Thanks! We’ll confirm your appointment within one business day.';
+      status.textContent = 'Thank you — I’ll reply within one business day, usually sooner.';
       status.classList.add('is-success');
       form.reset();
     });
