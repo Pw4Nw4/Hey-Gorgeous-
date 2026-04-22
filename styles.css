@@ -1,28 +1,39 @@
 :root {
-  --bg: #fbf6ef;
-  --bg-alt: #f4e7da;
+  --bg: #fdf4f0;
+  --bg-alt: #f8e2dc;
   --cream: #ffffff;
-  --ink: #2d2420;
-  --ink-soft: #5e4f48;
-  --muted: #9a8a7e;
-  --line: #ecd9c5;
-  --blush: #f2d4c6;
-  --blush-deep: #d9a697;
-  --champagne: #e7d2b3;
-  --gold: #b48a56;
-  --gold-soft: #d8bb8d;
+  --ink: #2d1f23;
+  --ink-soft: #6a4a52;
+  --muted: #a48c90;
+  --line: #f1d3cb;
+  --blush: #f6c7cf;
+  --blush-deep: #d88a9a;
+  --champagne: #f1d4c4;
+  --gold: #c68a78;
+  --gold-soft: #e7b8a6;
+  --pink-gold: #d9a49a;
+  --pink-gold-deep: #b76e79;
+  --sparkle: #fff3dc;
 
   --radius: 14px;
   --radius-lg: 26px;
-  --shadow-sm: 0 1px 2px rgba(45, 36, 32, 0.05);
-  --shadow: 0 14px 36px rgba(45, 36, 32, 0.08);
-  --shadow-lg: 0 28px 80px rgba(45, 36, 32, 0.12);
+  --shadow-sm: 0 1px 2px rgba(183, 110, 121, 0.08);
+  --shadow: 0 14px 36px rgba(183, 110, 121, 0.14);
+  --shadow-lg: 0 28px 80px rgba(183, 110, 121, 0.20);
 
   --font-display: "Fraunces", Georgia, serif;
   --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
 
   --w-container: 1120px;
   --pad-section: clamp(3.5rem, 7vw, 7rem);
+
+  --glitter:
+    radial-gradient(circle at 12% 22%, rgba(255, 220, 200, 0.95) 1px, transparent 1.6px),
+    radial-gradient(circle at 28% 66%, rgba(255, 243, 220, 0.85) 0.8px, transparent 1.4px),
+    radial-gradient(circle at 48% 18%, rgba(255, 210, 220, 0.95) 1px, transparent 1.6px),
+    radial-gradient(circle at 64% 82%, rgba(255, 230, 200, 0.8) 0.9px, transparent 1.5px),
+    radial-gradient(circle at 82% 34%, rgba(255, 215, 190, 0.95) 1.1px, transparent 1.7px),
+    radial-gradient(circle at 92% 72%, rgba(255, 245, 222, 0.8) 0.7px, transparent 1.3px);
 }
 
 * { box-sizing: border-box; }
@@ -120,7 +131,7 @@ p { margin: 0 0 1em; }
   position: sticky;
   top: 0;
   z-index: 50;
-  background: rgba(251, 246, 239, 0.82);
+  background: rgba(253, 244, 240, 0.82);
   backdrop-filter: saturate(140%) blur(10px);
   -webkit-backdrop-filter: saturate(140%) blur(10px);
   border-bottom: 1px solid transparent;
@@ -147,12 +158,17 @@ p { margin: 0 0 1em; }
   color: var(--ink);
 }
 .logo-mark {
+  position: relative;
   display: inline-block;
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, var(--gold-soft), var(--gold) 70%);
-  box-shadow: 0 0 0 3px rgba(180, 138, 86, 0.18);
+  background:
+    radial-gradient(circle at 35% 30%, #fff1e0 0%, var(--gold-soft) 45%, var(--pink-gold-deep) 100%);
+  box-shadow:
+    0 0 0 3px rgba(183, 110, 121, 0.18),
+    0 0 10px rgba(231, 184, 166, 0.6);
+  animation: sparkle 3.8s ease-in-out infinite;
 }
 .logo-text {
   font-family: var(--font-display);
@@ -236,9 +252,10 @@ p { margin: 0 0 1em; }
   border-color: var(--ink);
 }
 .btn-primary:hover {
-  background: var(--gold);
-  border-color: var(--gold);
+  background: var(--pink-gold-deep);
+  border-color: var(--pink-gold-deep);
   color: var(--cream);
+  box-shadow: 0 10px 26px rgba(183, 110, 121, 0.35);
 }
 
 .btn-ghost {
@@ -257,9 +274,26 @@ p { margin: 0 0 1em; }
   overflow: hidden;
   padding: clamp(4rem, 9vw, 8rem) 0 clamp(3rem, 6vw, 5rem);
   background:
-    radial-gradient(1200px 600px at 85% 0%, rgba(242, 212, 198, 0.55), transparent 60%),
-    radial-gradient(900px 500px at -5% 100%, rgba(231, 210, 179, 0.55), transparent 55%),
+    radial-gradient(1200px 600px at 85% 0%, rgba(246, 199, 207, 0.6), transparent 60%),
+    radial-gradient(900px 500px at -5% 100%, rgba(231, 184, 166, 0.55), transparent 55%),
     var(--bg);
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--glitter);
+  background-size:
+    140px 140px, 110px 110px, 170px 170px,
+    130px 130px, 160px 160px, 120px 120px;
+  background-position:
+    0 0, 30px 40px, 60px 20px,
+    80px 90px, 10px 70px, 50px 0;
+  mix-blend-mode: screen;
+  opacity: 0.65;
+  animation: sparkle 6s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
 }
 .hero-inner {
   position: relative;
@@ -272,10 +306,19 @@ p { margin: 0 0 1em; }
 }
 .hero h1 em {
   color: var(--ink);
-  background: linear-gradient(120deg, var(--gold) 20%, var(--blush-deep) 80%);
+  background: linear-gradient(
+    110deg,
+    var(--pink-gold-deep) 0%,
+    var(--gold-soft) 30%,
+    #fff3e0 48%,
+    var(--gold-soft) 66%,
+    var(--pink-gold-deep) 100%
+  );
+  background-size: 220% 100%;
   -webkit-background-clip: text;
           background-clip: text;
   -webkit-text-fill-color: transparent;
+  animation: shimmer 5.5s ease-in-out infinite;
 }
 .hero .lead { font-size: 1.22rem; margin-bottom: 2.25rem; max-width: 46ch; }
 
@@ -324,17 +367,17 @@ p { margin: 0 0 1em; }
   width: 480px;
   height: 480px;
   background:
-    radial-gradient(circle at 30% 30%, #ffe2d2 0%, rgba(255, 226, 210, 0) 60%),
-    conic-gradient(from 200deg, #f2d4c6, #e7d2b3, #d9a697, #f2d4c6);
+    radial-gradient(circle at 30% 30%, #ffe2d9 0%, rgba(255, 226, 217, 0) 60%),
+    conic-gradient(from 200deg, #f6c7cf, #e8b8a3, #b76e79, #f6c7cf);
 }
 .hero-petal-2 {
   bottom: -100px;
   left: -60px;
   width: 260px;
   height: 260px;
-  background: radial-gradient(circle at 60% 40%, #fff3e3 0%, rgba(255, 243, 227, 0) 60%),
-    conic-gradient(from 20deg, #f4e7da, #e7d2b3, #f2d4c6, #f4e7da);
-  opacity: 0.6;
+  background: radial-gradient(circle at 60% 40%, #fff0e8 0%, rgba(255, 240, 232, 0) 60%),
+    conic-gradient(from 20deg, #f8e2dc, #e8b8a3, #f6c7cf, #f8e2dc);
+  opacity: 0.65;
 }
 
 /* ---------------- generic section ---------------- */
@@ -348,10 +391,29 @@ p { margin: 0 0 1em; }
   position: absolute;
   top: 0; left: 50%;
   transform: translateX(-50%);
-  width: 48px;
+  width: 64px;
   height: 1px;
-  background: var(--gold);
-  opacity: 0.5;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--pink-gold-deep) 30%,
+    #fff3e0 50%,
+    var(--pink-gold-deep) 70%,
+    transparent
+  );
+  opacity: 0.85;
+}
+.section + .section::after {
+  content: "";
+  position: absolute;
+  top: -2px; left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff3e0, var(--gold-soft) 60%, var(--pink-gold-deep));
+  box-shadow: 0 0 8px rgba(231, 184, 166, 0.8);
+  animation: sparkle 3.5s ease-in-out infinite;
 }
 
 .section-head {
@@ -360,7 +422,12 @@ p { margin: 0 0 1em; }
 }
 
 /* ---------------- approach / about ---------------- */
-.approach { background: var(--bg); }
+.approach {
+  background-color: var(--bg);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .approach-grid {
   display: grid;
@@ -400,6 +467,22 @@ p { margin: 0 0 1em; }
   overflow: hidden;
   box-shadow: var(--shadow);
 }
+.approach-art::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--glitter);
+  background-size:
+    110px 110px, 90px 90px, 140px 140px,
+    100px 100px, 130px 130px, 95px 95px;
+  background-position:
+    0 0, 20px 30px, 55px 10px,
+    70px 80px, 15px 60px, 40px 5px;
+  mix-blend-mode: screen;
+  opacity: 0.55;
+  animation: sparkle 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
 .bloom {
   position: absolute;
   border-radius: 50%;
@@ -408,20 +491,20 @@ p { margin: 0 0 1em; }
 .bloom-1 {
   width: 60%; height: 60%;
   top: 8%; left: 12%;
-  background: radial-gradient(circle at 35% 35%, #fff3e8, #f2d4c6 55%, #d9a697 100%);
+  background: radial-gradient(circle at 35% 35%, #fff3ec, #f6c7cf 55%, #d88a9a 100%);
   opacity: 0.95;
 }
 .bloom-2 {
   width: 38%; height: 38%;
   bottom: 10%; right: 10%;
-  background: radial-gradient(circle at 40% 40%, #ffffff, #e7d2b3 60%, #b48a56 110%);
-  opacity: 0.85;
+  background: radial-gradient(circle at 40% 40%, #ffffff, #e7b8a6 55%, #b76e79 110%);
+  opacity: 0.88;
 }
 .bloom-3 {
   width: 22%; height: 22%;
   top: 52%; left: 8%;
-  background: radial-gradient(circle at 40% 40%, #ffffff, #f2d4c6 70%);
-  opacity: 0.8;
+  background: radial-gradient(circle at 40% 40%, #ffffff, #f6c7cf 70%);
+  opacity: 0.82;
 }
 .stem {
   position: absolute;
@@ -429,14 +512,19 @@ p { margin: 0 0 1em; }
   top: 40%;
   width: 2px;
   height: 45%;
-  background: linear-gradient(180deg, var(--gold), transparent);
+  background: linear-gradient(180deg, var(--pink-gold-deep), transparent);
   transform: rotate(-8deg);
   transform-origin: top;
-  opacity: 0.6;
+  opacity: 0.65;
 }
 
 /* ---------------- packages ---------------- */
-.packages { background: var(--bg-alt); }
+.packages {
+  background-color: var(--bg-alt);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .service-grid {
   display: grid;
@@ -525,7 +613,12 @@ p { margin: 0 0 1em; }
 }
 
 /* ---------------- trial ---------------- */
-.trial { background: var(--bg); }
+.trial {
+  background-color: var(--bg);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .trial-steps {
   list-style: none;
@@ -574,7 +667,12 @@ p { margin: 0 0 1em; }
 }
 
 /* ---------------- gallery ---------------- */
-.gallery { background: var(--bg-alt); }
+.gallery {
+  background-color: var(--bg-alt);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .gallery-grid {
   display: grid;
@@ -603,16 +701,39 @@ p { margin: 0 0 1em; }
   letter-spacing: 0.04em;
 }
 
-/* soft romantic gradient tiles, some spanning wider */
-.tile-a { background: linear-gradient(145deg, #fbe5d6, #e6b79e 60%, #c48b78); grid-column: span 2; }
-.tile-b { background: linear-gradient(145deg, #fff7ee, #f2d4c6 60%, #e3b79b); }
-.tile-c { background: linear-gradient(145deg, #efe1cd, #cfa887 70%, #a07c5c); }
-.tile-d { background: linear-gradient(145deg, #f8e8da, #d9a697 65%, #8a5848); grid-column: span 2; }
-.tile-e { background: linear-gradient(145deg, #2f2724, #5c473e 75%); }
-.tile-f { background: linear-gradient(145deg, #f7ead6, #d6b287 65%, #9b7549); }
+/* soft pink & rose-gold gradient tiles, some spanning wider */
+.tile-a { background: linear-gradient(145deg, #fde2e8, #eab3b6 60%, #b76e79); grid-column: span 2; }
+.tile-b { background: linear-gradient(145deg, #fff2ec, #f6c7cf 60%, #d88a9a); }
+.tile-c { background: linear-gradient(145deg, #f5dacb, #d6a192 70%, #9a5f5a); }
+.tile-d { background: linear-gradient(145deg, #fbe3d8, #e09a95 65%, #8a4a54); grid-column: span 2; }
+.tile-e { background: linear-gradient(145deg, #3b2128, #6b4049 75%); }
+.tile-f { background: linear-gradient(145deg, #fae0d2, #e2a692 65%, #a26656); }
+
+.tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--glitter);
+  background-size:
+    90px 90px, 70px 70px, 110px 110px,
+    80px 80px, 100px 100px, 75px 75px;
+  background-position:
+    0 0, 15px 25px, 45px 5px,
+    55px 60px, 10px 50px, 30px 0;
+  mix-blend-mode: screen;
+  opacity: 0.5;
+  pointer-events: none;
+  animation: sparkle 8s ease-in-out infinite alternate;
+}
+.tile figcaption { z-index: 1; }
 
 /* ---------------- testimonials ---------------- */
-.testimonials { background: var(--bg); }
+.testimonials {
+  background-color: var(--bg);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .quote-grid {
   display: grid;
@@ -654,7 +775,12 @@ blockquote footer {
 }
 
 /* ---------------- faq ---------------- */
-.faq { background: var(--bg-alt); }
+.faq {
+  background-color: var(--bg-alt);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .faq-grid {
   display: grid;
@@ -712,7 +838,12 @@ blockquote footer {
 }
 
 /* ---------------- book / inquire ---------------- */
-.book { background: var(--bg); }
+.book {
+  background-color: var(--bg);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .book-grid {
   display: grid;
@@ -776,8 +907,8 @@ blockquote footer {
 .field select:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(180, 138, 86, 0.18);
+  border-color: var(--pink-gold-deep);
+  box-shadow: 0 0 0 3px rgba(183, 110, 121, 0.18);
 }
 .field textarea { resize: vertical; }
 
@@ -796,7 +927,12 @@ blockquote footer {
 .form-status.is-success { color: #4a7a4e; }
 
 /* ---------------- visit ---------------- */
-.visit { background: var(--bg-alt); }
+.visit {
+  background-color: var(--bg-alt);
+  background-image: var(--glitter);
+  background-size: 220px 220px, 180px 180px, 260px 260px, 200px 200px, 240px 240px, 190px 190px;
+  background-position: 0 0, 50px 80px, 110px 30px, 140px 150px, 30px 120px, 90px 10px;
+}
 
 .visit-grid {
   display: grid;
@@ -815,7 +951,17 @@ blockquote footer {
 .visit .hours { color: var(--ink-soft); }
 
 .map-card {
-  background: linear-gradient(160deg, #f4e1cc, #d8b28d);
+  background-image:
+    var(--glitter),
+    linear-gradient(160deg, #fbdcd2, #d89a9a);
+  background-size:
+    110px 110px, 85px 85px, 140px 140px,
+    100px 100px, 125px 125px, 90px 90px,
+    100% 100%;
+  background-position:
+    0 0, 20px 30px, 50px 10px,
+    70px 80px, 15px 60px, 45px 0,
+    0 0;
   border-radius: var(--radius-lg);
   padding: 2rem;
   min-height: 240px;
@@ -899,6 +1045,17 @@ blockquote footer {
 .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* ---------------- glitter animations ---------------- */
+@keyframes sparkle {
+  0%   { opacity: 0.35; filter: brightness(0.95); }
+  50%  { opacity: 0.85; filter: brightness(1.1); }
+  100% { opacity: 0.45; filter: brightness(1); }
+}
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50%      { background-position: 100% 50%; }
 }
 
 /* ---------------- responsive ---------------- */
