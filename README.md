@@ -1,6 +1,6 @@
-# Hey Gorgeous
+# oh hey Gorgeous
 
-Marketing site for Hey Gorgeous, a bridal hair &amp; makeup specialist (on-location, trials included).
+Marketing site for oh hey Gorgeous, a bridal hair &amp; makeup specialist (on-location, trials included).
 
 Static HTML/CSS/JS — no build step, no dependencies. Edit the files, refresh the browser.
 
